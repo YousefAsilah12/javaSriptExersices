@@ -46,6 +46,8 @@ else if(marryavg> mikeavg&&marryavg >jhonavg){
 else{
   console.log("no one wins")
 }
+
+//while some winnig and other draw : 
  if(mikeavg === marryavg ){
   console.log("mike teams and marry tems draw :" + mikeavg);
 }else if(mikeavg===jhonavg){
