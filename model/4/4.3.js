@@ -17,7 +17,7 @@
 
 
 let jhon = [116, 33, 444];
-let mike = ;
+let mike = [116, 3333, 444];
 let marry = [116, 33, 444];
 
 const average = (parm) => {
