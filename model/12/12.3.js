@@ -37,7 +37,7 @@ const school = {
   ],
 };
 
-function findPerson(type, id) {
+school.findPerson = (type, id) => {
   if (type === "teachers") {
     return school.teachers.find(val => val.id === id);
 
@@ -52,17 +52,34 @@ function findPerson(type, id) {
 
 
 
-function assignStudent(id,subjcet){
-
-  let student = findPerson("students", id);
-  let teacher= school.teachers.subjects.find(val => val.subject === subjcet.subject);
-  if(teacher && teacher.capacityLeft>0){
+school.assignStudent = (studentId, subject) => {
+  const student = school.students.find(student => student.id === studentId);
+  if (!student) return;
+  const teacher = school.teachers.find(teacher => teacher.subjects.includes(subject) && teacher.capacityLeft > 0);
+  if (teacher) {
     teacher.students.push(student);
-    capacityLeft--;
-    console.log(`student ${student.name } has added to teacher : ${teacher.name} with subject${subjcet}`);
+    teacher.capacityLeft--;
+    console.log('STUDENTS WITH TEACHER', teacher.students);
+  } else {
+    console.log("Sorry, no available teachers left");
   }
-  else{
-    console.log("sorry no available teachers left");
+}
+
+school.assignTeachersSubject = (teacherId, newSubject) => {
+  const teacher = school.teachers.find(teacher => teacher.id === teacherId);
+  if (!teacher) {
+    return;
+  }
+  if (!teacher.subjects.includes(newSubject)) {
+    teacher.subjects.push(newSubject);
+  }
+}
+
+//  i chosse to remove student that is the last parst of the question
+school.removeStudent = (studentId) => {
+  const index = school.students.findIndex(student => student.id === studentId);
+  if(index !== -1) {
+    school.students.splice(index, 1);
   }
 }
 
@@ -71,8 +88,7 @@ function assignStudent(id,subjcet){
 
 
 
-
-
-
-console.log(findPerson("students", 10));
-console.log(assignStudent( 10,"history"));
+console.log(school.findPerson("students", 10));
+school.assignStudent(10, "history");
+school.assignStudent( "history");
+school.assignStudent( 10);
