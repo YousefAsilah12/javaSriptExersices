@@ -8,21 +8,3 @@
 
 // Block3
 
-var module = (function () {
-  var foo = 'foo'
-  function addToFoo (bam) {
-  foo = bam;
-  return foo;
-  }
-  var publicInterface = {
-  bar: function () {
-  return 'bar';
-  },
-  bam: function () {
-  return addToFoo('bam')
-  }
-  }
-  return publicInterface
-  })()
-  console.log(module.bar())
-  console.log(module.bam())
