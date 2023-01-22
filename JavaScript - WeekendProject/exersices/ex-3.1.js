@@ -6,7 +6,7 @@
 function getYear(population, percentage, popPerYear, equalsTo) {
 
   let testYear = population; //used to save the sum of population to compare with year that givin
-  percentage = percentage / 100;
+  percentage = percentage / 100; 
 
   let flag=false;
   //i  start with 1 

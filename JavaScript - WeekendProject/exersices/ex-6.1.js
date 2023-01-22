@@ -14,6 +14,6 @@ function accum(str) {
 
 }
 
-console.log(accum('abcd'));
-console.log(accum('Rqaezty'));
-console.log(accum('cwAt'));
+console.log(accum('abcd'));//a-Bb-Ccc_Dddd
+console.log(accum('Rqaezty'));//R-Qq-Aaa-Eeee-Zzzz-Yyyyyy
+console.log(accum('cwAt'));//C-Ww-Aaa-Tttt

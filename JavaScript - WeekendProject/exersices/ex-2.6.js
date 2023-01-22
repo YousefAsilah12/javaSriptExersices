@@ -9,11 +9,11 @@
 function getCentury(year) {
 
   if (year.toString().length === 4 && Number.isInteger(year)) {
-    year = year.toString();
+    year = year.toString();// number to string
     if (year.charAt(2) === '0' && year.charAt(3) === '0') {
       return year.charAt(0) + year.charAt(1);
-    } else if (year.charAt(2) > '0' || year.charAt(3) > '0') {
-      return parseInt(year.charAt(0) + year.charAt(1)) + 1;
+    } else if (year.charAt(2) > '0' || year.charAt(3) > '0') {//if last two digits bigger than 0  
+      return parseInt(year.charAt(0) + year.charAt(1)) + 1; //take the next century
 
     }
 
