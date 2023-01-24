@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .pass {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    ;
+    flex-direction: row;
+    ;
+    justify-content: center;
+    align-items: center;
+    background-color: cadetblue;
+    border-radius: 20px;
+    padding: 2%;
+    border: black 1px solid;
+
+  }
+
+  .input {
+    width: 50px;
+    height: 50px;
+    margin: .5vw;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+  }
+</style>
+
+<body>
+
+  <form action="">
+    <div class="pass">
+      <div class="container">
+        <input type="text" class="input" maxlength="1">
+        <input type="text" class="input "maxlength="1">
+        <input type="text" class="input "maxlength="1">
+        <input type="text" class="input "maxlength="1">
+        <input type="text" class="input "maxlength="1">
+        <input type="text" class="input "maxlength="1">
+        <input type="submit" class="input2" onclick="clickMe()">
+      </div>
+      <!-- <input type="reset" value="reset"> -->
+  </form>
+  <div class="child"></div>
+  </div>
+  <script>
+    const inputs = document.querySelectorAll(".input");
+    const submit=document.querySelector(".input2");
+    for (let i = 0; i < inputs.length-1; i++) {
+      inputs[i].addEventListener("keyup", function () {
+        if (inputs[i].value.length >= 1) {
+          inputs[i + 1].focus();
+        }
+      })
+    }
+
+    function clickMe() {
+      console.log("object");
+      inputs.forEach(element => {
+        element.value = ""
+      });
+      let parent=document.querySelector(".child");
+      let child= document.createElement("p")
+      child.innerText="ok!"
+      child.style.display = "block";
+      child.style.fontSize="50px"
+      parent.appendChild(child);
+    }
+
+    inputs[0].addEventListener("paste", function (e) {
+      e.preventDefault();
+      debugger
+      var pastedText = e.clipboardData.getData('text');
+        for (let i = 0; i < pastedText.length; i++) {
+        inputs[i].value = pastedText[i];
+      }
+
+
+
+    });
+  </script>
+</body>
+
+</html>

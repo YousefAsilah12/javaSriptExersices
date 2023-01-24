@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <ul>
+    <li>title 1</li>
+    <li class="start-here">title 2</li>
+    <li>
+      <ul>
+        <li>sub title 1</li>
+        <li>sub title 2</li>
+        <li>sub title 3</li>
+      </ul>
+    </li>
+    <li>title 3</li>
+  </ul>
+  <div>
+    <p>Hello World!</p>
+  </div>
+</body>
+<script>
+  const main=document.querySelector(".start-here");
+  let newchild= document.createElement("li")
+  newchild.innerText="subtitile 4";
+  main.appendChild(newchild);
+
+  let list= main.nextElementSibling.children[0];
+  console.log(list);
+  let lastChild =list.lastElementChild;
+  console.log(lastChild.innerText);
+  list.removeChild(lastChild);
+
+
+  document.querySelector("title").innerText="Monster Of The Dom"
+  document.querySelector("p").innerText="Monster Of The Dom"
+  
+
+</script>
+</html>
