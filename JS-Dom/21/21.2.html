@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #text {
+    font-size: 6px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .increase {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    margin-right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .decrease {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .increase:active,
+  .decrease:active {
+    transform: translateY(2px);
+  }
+</style>
+</head>
+
+<body>
+  <div id="text">
+    Hello, this is some text
+  </div>
+  <div style="text-align:center;">
+    <button class="increase">+</button>
+    <button class="decrease">-</button>
+  </div>
+  <script>
+    const txt =document.getElementById("text");
+    const increase = document.querySelector(".increase");
+    const decrease = document.querySelector(".decrease");
+    let count=0;
+    let pixelReached=6;//6 - 100 if > 100 will stop
+    increase.addEventListener("click", ()=>{
+      if(pixelReached>= 100)
+      {
+        return;
+      }
+      count+=1;
+      txt.style.fontSize=6+count+"px";
+      pixelReached+=1;
+    });
+    decrease.addEventListener("click", ()=>{
+      if(count<1){//thats will not make the count under 0 , its will not go to minus
+        return false
+      }
+      count-=1;
+      if (count<1) {
+        txt.style.fontSize=6+"px";
+
+      }
+      else{
+        txt.style.fontSize=6+count+"px";
+
+      }
+    });
+  </script>
+</body>
+
+</html>

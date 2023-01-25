@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <form action="#">
+    <input type="number" id="number">
+    <input type="submit" value="submit" id="submit">
+  </form>
+  <script>
+    const number = document.getElementById('number');
+    const submit = document.getElementById('submit');
+    const form = document.querySelector('form');
+
+    submit.addEventListener('click', () => {
+
+      let images = document.querySelectorAll('img');
+
+      //removing old imgs 
+      for (let image of images) {
+        image.remove();
+      }
+
+
+      for (let i = 0; i < Number(number.value); i++) {
+        let img = document.createElement('img');
+        img.src = './imgs/smily.png'
+        img.style.width = '50px'
+        form.appendChild(img);
+      }
+
+    })
+  </script>
+</body>
+
+</html>

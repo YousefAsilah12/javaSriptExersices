@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  form {
+    width: 50%;
+    margin: 0 auto;
+    border: 2px solid gray;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 150px;
+    margin-bottom: 10px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: blue;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: darkblue;
+  }
+
+  button:active {
+    transform: translateY(2px);
+  }
+</style>
+</head>
+
+<body>
+  <form action="#">
+    <label for="text">Enter your text here:</label>
+    <textarea id="text" minlength="100"></textarea>
+    <button type="submit" id="submit">Submit</button>
+  </form>
+
+  <script>
+    const txt = document.getElementById("text");
+    const submit = document.getElementById("submit");
+
+    submit.addEventListener("click", () => {
+      if (txt.value.length<100){
+        alert("You have to Enter at least 100 letters");
+      }
+    });
+  </script>
+</body>
+
+
+
+</html>
