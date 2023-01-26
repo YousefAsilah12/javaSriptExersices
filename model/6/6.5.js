@@ -8,7 +8,9 @@ const newarr=Object.values(object);//it will save the values of object as an arr
 
 let objConvert={}
 let arrayConvert=[1,2,2,3]
+
 Object.assign(objConvert, arrayConvert); 
+
 console.log(objConvert)
 
 console.log("if array :  "+Array.isArray(arrayConvert)); 
