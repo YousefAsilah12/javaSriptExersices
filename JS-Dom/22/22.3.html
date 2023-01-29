@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .game {
+    text-align: center;
+  }
+
+  .form {
+    margin-top: 50px;
+  }
+
+  input[type="text"] {
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .result .message {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .result .message.correct {
+    color: green;
+  }
+
+  .result .message.incorrect {
+    color: red;
+  }
+
+  .result .guesses {
+    margin-top: 10px;
+  }
+
+  .play-again {
+    margin-top: 20px;
+    display: none;
+  }
+</style>
+
+<body>
+
+  <div class="game">
+
+
+    <h1>Guess the Letter</h1>
+    <div class="result">
+      <p class="message">what is the letter </p>
+      <p class="guesses">? </p>
+    </div>
+    <div class="form">
+      <input type="text" id="input" placeholder="Enter a letter">
+    </div>
+    <div class="play-again">
+      <button>Play Again</button>
+    </div>
+  </div>
+  <script>
+    // global 
+    const input = document.getElementById("input");
+    const btAgain = document.querySelector(".play-again");
+    const message = document.querySelector(".message");
+    const gusses = document.querySelector(".guesses");
+    const lowercaseRegex = /^[a-z]+$/;
+    // array of all letters
+    const letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+      "u", "v", "w", "x", "y", "z"
+    ];
+    let letter = letters[Math.floor(Math.random() * letters.length)];
+    input.focus();
+    let usedChars = [];
+    input.addEventListener("keyup", (e) => {
+      debugger
+
+      // if alphabeta only lower
+      let char = e.target.value[e.target.value.length - 1]
+      if (lowercaseRegex.test(char) === false) {
+        e.target.value = e.target.value.slice(0, -1);;
+        alert("you cant type only alphabeta lowercase letters")
+        e.stopPropagation();
+      }
+
+
+      //if twice
+      if (usedChars.includes(char)) {
+        e.target.value = e.target.value.slice(0, -2);;
+        alert("you cant type same char twice")
+      } else {
+        usedChars.push(char);
+      }
+
+
+      if (e.target.value[e.target.value.length - 1] === letter) {
+        message.innerText = "you gussed the letter ";
+        gusses.innerText = letter;
+        message.style.color = "green";
+        gusses.style.color = "green";
+
+        btAgain.style.display = "block";
+        input.disabled = true;
+      } else {
+        e.target.value += ","
+        message.style.color = "red";
+        gusses.style.color = "red";
+
+      }
+    })
+    btAgain.addEventListener("click", () => {
+      input.disabled = false;
+      gusses.innerText = "?";
+      message.innerText = "What is the letter ";
+      btAgain.style.display = "none";
+      message.style.color = "black";
+      gusses.style.color = "black";
+      input.value = ""
+      input.focus();
+      usedChars = [];
+      letter = letters[Math.floor(Math.random() * letters.length)];
+
+    })
+  </script>
+</body>
+
+</html>

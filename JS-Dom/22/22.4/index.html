@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Race 🏎</title>
+  <link rel="shortcut icon" href="data:image/x-icon;" type="image/x-icon" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="banner">
+    <h1 class="text-center">Race</h1>
+  </div>
+  <hr />
+  <!-- You race HTML code here -->
+  <table class="racer-table">
+    <tr id="player1-race">
+      <td class="active"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="finish"></td>
+    </tr>
+    <tr id="player2-race">
+      <td class="active"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="finish"></td>
+    </tr>
+  </table>
+
+  <h1 class="winner"></h1>
+  <button class="play-again" onclick="playAgain()" style="display: none;">PlayAgain</button>
+  <script>
+    let lineOne = document.getElementById("player1-race").children;
+    let lineTwo = document.getElementById("player2-race").children;
+    let countP1=1;
+    let countP2=1;
+    let winner=""
+    console.log(lineOne);
+
+    document.addEventListener("keydown", function (event) {
+
+      if(countP1 === lineOne.length)  
+      {
+        winner="player1";
+        document.querySelector(".winner").innerText= winner+"wins";
+        document.querySelector(".play-again").style.display="block";
+        e.stopPropagation();
+      }
+      if(countP2 === lineTwo.length-1)  
+      {
+        winner="player2"
+        document.querySelector(".winner").innerText= winner+"wins";
+        document.querySelector(".play-again").style.display="block";
+        e.stopPropagation();
+      }
+
+
+      if (event.key === "a") {
+        movePlayer("a");
+          countP2++;
+
+      } else if (event.key === "d") {
+        movePlayer("d");
+        countP1++;
+      }
+
+
+
+    });
+
+    function movePlayer(chr) {
+      if (chr === "a") {
+        for (let i = 0; i < lineOne.length-1; i++) {
+          if (lineOne[i].classList.contains('active')) {
+            lineOne[i].classList.remove('active');
+            if (i === lineOne.length - 1) {
+              lineOne[0].classList.add('active');
+            } else {
+              lineOne[i + 1].classList.add('active');
+            }
+            break;
+          }
+        }
+      } else if (chr === "d") {
+        for (let i = 0; i < lineTwo.length-1; i++) {
+          if (lineTwo[i].classList.contains('active')) {
+            lineTwo[i].classList.remove('active');
+            if (i === lineTwo.length - 1) {
+              lineTwo[0].classList.add('active');
+            } else {
+              lineTwo[i + 1].classList.add('active');
+            }
+            break;
+          }
+        }
+
+      }
+    }
+
+    function playAgain(){
+      document.querySelector(".play-again").style.display="none";
+      document.querySelector(".winner").innerText ="";
+      for (let i = 0; i < lineOne.length; i++) {
+          if (lineOne[i].classList.contains('active')) {
+            lineOne[i].classList.remove('active');
+          }
+        }
+      for (let i = 0; i < lineTwo.length; i++) {
+          if (lineTwo[i].classList.contains('active')) {
+            lineTwo[i].classList.remove('active');
+          }
+        }
+
+        lineOne[0].classList.add('active');
+        lineTwo[0].classList.add('active');
+        countP1 = 0;
+        countP2 = 0;
+    }
+  </script>
+  <hr />
+</body>
+
+</html>

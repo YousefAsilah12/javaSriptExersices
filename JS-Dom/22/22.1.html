@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  /* Add CSS styles here */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;height: 100vh;
+  }
+
+  label {
+    width: 100px;
+  }
+
+ input{
+  
+    margin: 5px;
+  }
+  .alert-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.alert-message {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.alert-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.alert-buttons button ,#submit {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.alert-buttons .confirm-button {
+  background-color: #4CAF50;
+}
+
+.alert-buttons .change-button {
+  background-color: #f44336;
+}
+
+
+</style>
+</head>
+<div class="alert-box" style="display: none;">
+  <p class="alert-message"></p>
+  <div class="alert-buttons">
+    <button class="confirm-button" onclick="confirmSubmit()">Confirm</button>
+    <button class="change-button" onclick="changeInformation()">Change</button>
+  </div>
+</div>
+
+<body>
+  <form >
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <input type="submit" id="submit" value="Submit" >
+  </form>
+  <script>
+
+    const alertWindow= document.querySelector(".alert-box");
+    const submit=document.getElementById("submit");
+    submit.addEventListener("click", (e)=>{
+        e.preventDefault();
+        let name = document.getElementById("name").value;
+      let age = document.getElementById("age").value;
+      let email = document.getElementById("email").value;
+      let text = "Name: " + name + "\nAge: " + age + "\nEmail: " + email;
+      document.querySelector(".alert-message").innerText=text;
+      alertWindow.style.display="block";
+
+    })
+
+    function confirmSubmit() {
+        alert("congratulations you successfully sent this form");
+        alertWindow.style.display="none";
+
+    }
+
+    function changeInformation() {
+      alertWindow.style.display="none";
+
+    }
+  </script>
+</body>
+
+</html>
