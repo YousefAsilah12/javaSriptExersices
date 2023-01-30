@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // in this case we have to change this referenece to the specific object storm 
+    //  we can use one of the 3 following options :
+    //  call :when you need to invoke the function emmediately set the value of this 
+    //  apply : close to call but its take an array 
+    //  bind : when you need to create function with this that the new function can be invoked later .
+
+    // call & apply are usefull when you need to set this for singal invokation  
+    // bind is usefull when you need to create function that will invoked multiple times
+
+    // in this example ill go with call to set this 
+
+    const storm = {
+      superPower: "hello world"
+    }
+
+    function printSuperPower() {
+      console.log("my superpower is " +
+        this.superPower);
+    }
+    printSuperPower.call(storm);//setting the value of this inside the storm object .
+  </script>
+</body>
+
+</html>

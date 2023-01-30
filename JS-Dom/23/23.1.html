@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<button class="element">click</button>
+<body>
+  <script>
+    //q1
+    console.log(this);
+    // refers to the global virable of js thats called window
+
+
+
+
+    // q2
+    const myObj = {
+      name: "Timmy",
+      geek: function () {
+        console.log("name:" + " " + this.name);
+      },
+    };
+    myObj.geek();
+
+    // in arrow function decleration its called the window object 
+    // in using function declration this will assign to out side object myObj
+
+
+    //q3
+
+    const myFuncDec = function () {
+      console.log(this);
+    };
+    myFuncDec();
+    // in this case its refers to the global object window , because its not referes to any object , its not called like a method inside an object 
+
+
+    // q4
+    const myFuncArrow = () => {
+      console.log(this);
+    };
+    myFuncArrow();
+    // arrow functions are different its takes the outter object but in this case same as before beacause its not refares to an object its refers to a global window object
+
+
+    // q5
+    const el=document.querySelector(".element")
+    el.addEventListener("click",function() {
+      console.log(this);
+    });
+    // beacause its arrow function decleration this referes to outter obj which is the window
+    // but if we add function regular decleration this value will refers to same function which is the button object
+    
+  </script>
+</body>
+
+</html>
