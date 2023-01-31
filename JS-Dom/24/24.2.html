@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Pokemon {
+      constructor(pokemonName, pokemonType, pokemonAttackList) {
+        this.name = pokemonName;
+        this.type = pokemonType;
+        this.attackList = pokemonAttackList;
+      }
+
+      callPokemon() {
+        console.log(`i choose you ${this.name}`);
+      }
+
+      attackPokemon(index) {
+        console.log(`${this.name} attack ${this.attackList[index]}`);
+      }
+
+
+    }
+
+
+    let a = new Pokemon("pok1", "type1", ["pok2", "pok3", "pok4", "pok5"]);
+    let b = new Pokemon("pok2", "type2", ["pok1", "pok3", "pok4", "pok5"]);
+    let c = new Pokemon("pok3", "type3", ["pok1", "pok2", "pok4", "pok5"]);
+
+
+    a.callPokemon();
+    a.attackPokemon(1);
+    b.callPokemon();
+    b.attackPokemon(2);
+    c.callPokemon();
+    c.attackPokemon(3);
+  </script>
+
+</body>
+
+</html>
