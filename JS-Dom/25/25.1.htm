@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // the problem is inside getStrength the value of this refers to the global object 
+    // fixing the problem using the call 
+    debugger
+    const hero = {
+      health: 5,
+      power: 68,
+      getStrength: function () {
+        debugger
+        if (this.health <= 5) {
+          return this.power - 10;
+        } else return this.power;
+      }
+    }
+
+    function whoIsStronger(getStrength) {
+      debugger
+      const myStrength = 82;
+      if (getStrength < myStrength) {
+        console.log("I am stronger");
+      } else console.log("You are stronger");;
+    }
+    const heroStrength = hero.getStrength.call(hero);
+    whoIsStronger(heroStrength);
+  </script>
+</body>
+
+</html>
