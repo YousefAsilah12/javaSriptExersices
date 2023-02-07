@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+<style>
+  .joke-title,
+  .the-joke {
+    text-align: center;
+  }
+
+  .btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: lightblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .joke-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .the-joke {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+</style>
+
+<body>
+  <button class="btn"> click for joke </button>
+  <h1 class="joke-title"></h1>
+  <p class="the-joke"></p>
+  <script>
+    document.querySelector('.btn').addEventListener('click', getFetch)
+
+    async function getFetch() {
+      try {
+        const url = "https://api.jokes.one/jod";
+        const response = await fetch(url);
+        const data = await response.json();
+        const joke = data.contents.jokes;
+        console.log(joke);
+        document.querySelector('.joke-title').innerText = joke[0].joke.title;
+        document.querySelector('.the-joke').innerText = joke[0].joke.text;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+
+</html>
