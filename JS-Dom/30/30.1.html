@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  input[type="text"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: lightblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  img {
+    margin-bottom: 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+
+  #nameDisplay {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  #repoDisplay {
+    font-size: 18px;
+  }
+</style>
+</head>
+<!-- <img class="img" src="https://via.placeholder.com/150" alt="Placeholder Image">
+  <br><br>
+  <h1 id="nameDisplay"></h1>
+  <p id="repoDisplay">Number of Repositories: <span class="repo-num"></span> </p> -->
+
+<body>
+  <input type="text" id="userName" placeholder="Enter your name">
+  <input type="submit" value="Submit" id="submit">
+  <br><br>
+  <div class="container">
+
+  </div>
+
+</body>
+
+
+<script>
+  document.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      getUser();
+    }
+  });
+  document.querySelector('#submit').addEventListener('click', getUser)
+
+  const userName = document.querySelector('#userName');
+  userName.focus()
+  const container = document.querySelector(".container");
+  let profiles = [];
+
+  async function getUser() {
+    if (userName.value) {
+      const url = `https://api.github.com/users/${userName.value}`
+      try {
+        let response = await fetch(url);
+        if (response.ok) {
+          let request = await response.json();
+          if (!objectExistsInArray(profiles, request)) {
+            profiles.push(request);
+            loadProfiles();
+          }
+        } else {
+          alert(`Error: ${response.status} , user not found`);
+        }
+        
+        userName.value = ""
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("insert user name ")
+    }
+  }
+
+
+  function objectExistsInArray(array, object) {
+    for (let item of array) {
+      let allPropertiesMatch = true;
+      for (let property in object) {
+        if (item[property] !== object[property]) {
+          allPropertiesMatch = false;
+          break;
+        }
+      }
+      if (allPropertiesMatch) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function loadProfiles() {
+    container.innerText = ""
+    profiles.forEach(element => {
+      let div = document.createElement('div');
+      div.classList.add('card');
+      let img = document.createElement('img');
+      img.src = element.avatar_url;
+      div.appendChild(img);
+      let h1 = document.createElement('h1');
+      h1.classList.add('nameDisplay');
+      h1.innerText = element.login
+      let p = document.createElement('p');
+      p.classList.add('repoDisplay')
+      p.innerText = "reps :"
+      let span = document.createElement('span');
+      span.innerText = element.public_repos
+      p.appendChild(span);
+      div.appendChild(h1);
+      div.appendChild(p);
+      container.appendChild(div);
+    });
+  }
+</script>
+
+</html>

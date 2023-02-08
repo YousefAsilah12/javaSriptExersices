@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* Add some basic styling */
+  body {
+    font-family: Arial, sans-serif;
+    height: 100vh !important;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+
+  }
+
+  .movie-card {
+    width: 30%;
+    border: 1px solid #ddd;
+    margin: 20px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 10px #ddd;
+  }
+
+  .movie-card img {
+    width: 100%;
+
+  }
+
+  .movie-card h2 {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .movie-card p {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 50%;
+    margin-bottom: 20px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: lightblue;
+    border: 0;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+  <h1>Movie Search</h1>
+  <input type="text" id="searchTerm" placeholder="Enter a movie name">
+  <input type="submit" id="searchButton" value="Search">
+  <div class="container" style="display: none;" id="movieContainer">
+    <div class="movie-card" id="firstMovieCard">
+      <!-- This is the first movie card that will be replaced with search results -->
+      <img class="img"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAADGCAMAAAAqo6adAAAALVBMVEXQ0NDw8PDU1NTW1tbv7+/b29vY2Njd3d3R0dHr6+vo6Oji4uLm5ubz8/Pj4+OXsBnXAAAE2klEQVR4nO2d23arMAxE65AGkjbn/z/3hHq1pYkvkixhC2keC+nSHo2BYHDe3kzr1LuAznJ+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+23J+22rjX6bLZVJtYUPxl3/nEO73EM63eeGraF+R+efrg/xb9/DBWdSOIvJPW/qombewnUTjn5/h1wx8Mpe2i0j880vzvwy4cRe3gyj8afyHFBpA4L9k6B8J0HcUJPCfs/whTPwVygrP/1HAD1eBEkWF5y/hh3ARqFFSaP7swS9K2yEQzX8t9/+u7EoYy7+Ujn4r/7tImWLC8k/l+AdtXwSw/KkrX80HAHZ+ZWdALH/x7G+A33r/32vHP2Xfgv34j1P1/K/sAhh9/Xer9F+iSEGh+SsHAGXDn/D9rzwAtN0AwPMXvwAqu/oj3f8pfQNUNxdEKPiUpb/rmwOgNCx3A/T+j708cZECmz4HaMQnzv9MiZOAwvC/kef/ls9n+qu2M18U+YA93bbzv2dlt71+1HDCWubP6zoOzrcPnb1f1XjCXh7iKaST1F2wMMv5bcv5bcv5bcv5bcv5bcv5bcv5bcv5bWtM/v3uKQ3Jf9lvGnVE/nV+aa/HKAbkj9NrOxkwHv/37OI+Q2A4/t/J1V0SMBr/dm55DwMG4/87tb7DEBiL//nJAvkEDMX/+mCFuAEj8aeeK5EeAgPxpx+rEU7AOPy5p4pkDRiGf8rgCw+BUfjzL9XKJmAQ/hK+qAFj8OfDLz0EhuAvd1/UgBH46/hyBgzAXwu/qAH9+SHdlzOgOz8UX8iA3vyw8MsZ0Jkf3n0hA/ry4/AlDOjKjwm/kAHM/Kh/h+2+hAG8/DPmUp2Cz24AK//6ahy4Pnz4JQzg5I9vBgITQOs+uwGM/N9LA4AMoHaf2wA+/t/3QgH1teCzGsDGv30ttpoAevi5DeDi/7suRsWAtu6zGsDE//xGZLG+dnw+A3j4X98JLySgNfysBrDwpxaFyRrA0X0+Azj4068DZ+rjwmcygIE/tyBCMgE84eczoJ0/vyJSwgC+7jMZ0MxfWg/lpT5efI7lJlr/Q3k5yKcEcOMzJKCRv7Yc2B8D+PHbDWjjr64Gtq1PAr95CDR9vLIW6pd+EiCD35qAFv7qWnhbA6TwGw1o4K+Hf1OfHH7bEKB/FhL+qIssflMC6L//gKlPFj+c6QZQ+aHhj/VVFg1sF7mNxA/Cw7+TqAng+/2LvqIOAcb1rzqL1knW37/oK1ICCPzjhT+KNATw/EOGP4qymOGB8ClDgH39667CDwEk/3tvwpqw/cTtP3T4o5AJQPEP3/2AHgIYfg34ATkEEDsrCH8UJgFwfiXdD7ghAObXg/8wAN5V6J5qwh8FNgC4o6burwIPARi/Nnz4EADtpiz8UTADIHvp6/4q2BAA8OvEBw6B+j4qwx8FMKC6i9burwIMgRq/ZnzIEKjsoDj8UTUDytt1d39VLQHFzfrxqwaUtqoPf1TRgMLGI3R/VTEB+W1HwS8bkN10kPBH5Q3IbTlO91flE5DZcCz8ggHpvx8q/FEZA5J/Plr3V2USkPrrfD+i0rfFU/yn5Yg6JQPQe/2D3nJ+23J+23J+23J+23J+23J+23J+23J+2zr9B+K1Q1EvhtkdAAAAAElFTkSuQmCC"
+        alt="Movie Poster">
+      <h2 class="title"></h2>
+      <p class="genere"><strong>Genre:</strong> </p>
+      <p class="year"><strong>Year:</strong> </p>
+      <p class="plot"><strong>Plot:</strong> </p>
+      <p class="director"><strong>Director:</strong> </p>
+      <p class="actors"><strong>Actors:</strong> </p>
+    </div>
+  </div>
+  <script>
+    document.querySelector("#searchButton").addEventListener("click", getMovie);
+    const search = document.querySelector("#searchTerm");
+    const container = document.querySelector(".container")
+
+
+    async function getMovie() {
+      debugger
+      if (search.value) {
+        try {
+          const myUrlWithParams = new URL("http://www.omdbapi.com/");
+          myUrlWithParams.searchParams.append("T", search.value);
+          myUrlWithParams.searchParams.append("apiKey", "6b8d6bad");
+          const response = await fetch(myUrlWithParams);
+          if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+            loadFilm(result);
+          } else {
+            throw new Error(`Request failed with status code: ${response.status}`);
+          }
+        } catch (error) {
+          alert(error);
+        }
+      } else {
+        alert("input is empty")
+      }
+    }
+
+
+    function loadFilm(data) {
+
+      container.style.display = "block";
+      document.querySelector(".img").src = data.Poster;
+      document.querySelector(".title").innerText = data.Title;
+      document.querySelector(".genere").innerText = "Genre: " + data.Genre;
+      document.querySelector(".year").innerText = "Year: " + data.Year;
+      document.querySelector(".plot").innerText = "Plot: " + data.Plot;
+      document.querySelector(".director").innerText = "Director: " + data.Director;
+      document.querySelector(".actors").innerText = "actors: " + data.Actors;
+
+      const div=document.createElement("div")
+      const h1 = document.createElement("h1")
+      h1.innerText = "Ratings"
+      div.appendChild(h1);
+      div.style.display = "flex";
+      div.style.flexDirection = "column";
+      data.Ratings.forEach(element => {
+        const source=document.createElement("h4")
+        const val=document.createElement("h3")
+        source.innerText = element.Source
+        val.innerText = element.Value
+        div.appendChild(source)
+        div.appendChild(val)
+      });
+      document.querySelector(".movie-card").appendChild(div);
+
+    }
+  </script>
+</body>
+</html>
