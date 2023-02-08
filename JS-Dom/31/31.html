@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    const fullArray = [];
+    getData().then(res=>createTable());
+    
+    async function getData() {
+      try {
+        const url = "https://swapi.dev/api/"
+        for (let i = 1; i <= 10; i++) {
+          const obj = await fetch(url + "people/" + i).then(res => res.json())
+          const planet = await fetch(obj.homeworld).then(res => res.json());
+          const filtred = {
+            name: obj.name,
+            height: obj.height,
+            hair_color: obj.hair_color,
+            planet: {
+              name: planet.name,
+              population: planet.population
+            }
+          }
+          fullArray.push(filtred)
+        }
+        console.log(fullArray);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    function createTable() {
+      console.log("createTable",fullArray);
+      const table = document.createElement('div');
+      table.style.display = 'flex';
+      table.style.flexDirection = 'column';
+
+      fullArray.forEach(element => {
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.flexDirection = 'row';
+        row.style.alignItems = 'center';
+        row.style.justifyContent = 'space-between';
+        row.style.padding = '10px';
+        row.style.border = '1px solid black';
+
+
+        const name = document.createElement('div');
+        name.innerText = element.name;
+
+        const height = document.createElement('div');
+        height.innerText = element.height;
+
+        const hair = document.createElement('div');
+        hair.innerText = element.hair_color;
+
+        const planetName = document.createElement('div');
+        planetName.innerText = element.planet.name;
+
+        const planetPopulation = document.createElement('div');
+        planetPopulation.innerText = element.planet.population;
+
+        row.appendChild(name);
+        row.appendChild(height);
+        row.appendChild(hair);
+        row.appendChild(planetName);
+        row.appendChild(planetPopulation);
+        table.appendChild(row);
+      });
+
+
+      document.body.appendChild(table);
+    }
+  </script>
+</body>
+
+</html>
